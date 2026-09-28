@@ -3,7 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- TEST: XSS vulnerability - AI review should block this -->
+<div id="output"></div>
+<script>
+  // Insecure: directly writing URL hash to DOM without sanitization
+  document.getElementById("output").innerHTML = location.hash;
 
+  // Insecure: hardcoded credentials
+  const API_KEY = "sk-test-1234567890abcdef";
+  fetch("https://api.example.com/data?key=" + API_KEY);
+</script>
 <title>Modern Login</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
